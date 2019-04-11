@@ -1,2 +1,2 @@
-# Algorithms-And-Data-Structures
+## Algorithms-And-Data-Structures
 This is my ADS repository.

@@ -26,7 +26,38 @@ class MultiSet extends AbstractMultiSet {
    */
   @Override
   public int count(int element) {
-    // TODO
+    if(this.elements == null || this.elements.size() == 0){
+      return 0;
+    }
+    int k = 0, min = this.elements.get(0), max = this.elements.get(this.elements.size()-1);
+
+    int mid = 0;
+    while(min <= max){
+      mid = (mid + max)/2;
+      int cmp = element - this.elements.get(mid);
+      if(cmp < 0){
+        max = mid - 1;
+      }else if(cmp > 0){
+        min = mid + 1;
+      }else{
+        k++;
+        break;
+      }
+    }
+
+    int i = mid+1;
+    while(i < this.elements.size() && this.elements.get(i) == element){
+      k++;
+      i++;
+    }
+
+    i = mid-1;
+    while(i >=0 && this.elements.get(i) == element){
+      k++;
+      i--;
+    }
+
+    return k;
   }
 
   /**
