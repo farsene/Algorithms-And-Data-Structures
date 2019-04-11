@@ -58,43 +58,35 @@ class Solution {
      *     On return, this array represents a valid heap.
      */
     public static void heapify(int[] array) {
-        for(int i = array.length ; i > 0 ; i++){
-            downHeap(array, i, array.length-1);
-        }
-    }
+      if(array != null && array.length > 0)
+          for(int i = array.length-1 ; i >= 0 ; i--){
+              downHeap(array, i, array.length-1);
+          }
+      }
+    
+      /**
+       * Sorts an array of integer numbers.
+       * This is an in-place algorithm, the elements inside the array are being sorted without creating a copy of the array.
+       *
+       * @param array
+       *     An array of integer numbers.
+       *     On return, this array is sorted.
+       */
+      public static void inPlaceHeapSort(int[] array) {
+          if(array != null && array.length > 1){
+              heapify(array);
+              inPlaceHeapSort(array, array.length-1);
+          }
+      }
   
-    /**
-     * Sorts an array of integer numbers.
-     * This is an in-place algorithm, the elements inside the array are being sorted without creating a copy of the array.
-     *
-     * @param array
-     *     An array of integer numbers.
-     *     On return, this array is sorted.
-     */
-    public static void inPlaceHeapSort(int[] array) {
-        
-    }
+      public static void inPlaceHeapSort(int[] array, int until) {
+        swap(array, 0, until);
+        if(until > 0){
+          // for(int i = until - 1 ; i>= 0 ; i--){
+          //   downHeap(array, i, until-1);
+          // }
+          downHeap(array, 0, until-1);
+          inPlaceHeapSort(array, until-1);
+        }
+      }
   }
-//   In this question, you are expected to implement In-Place Heap Sort. Since the implementation is in-place,
-// you are not allowed to define a new data structure for storing the heap. 
-//You will only operate on the given input array. A basic description of how In-Place Heap Sort works can be given as:
-
-// Build a max-heap from the input array.
-// Swap the first and last elements of the heap.
-// Perform bubbling to sift the new first element to the appropriate index in the heap and restore the heap-order.
-// Go to step (2) unless the heap contains only one element.
-// We provide you with skeleton codes of four methods. The first three are helper functions you can use in your implementation of the in-place heap sort algorithm inPlaceHeapSort. You also have to implement heapify, but methods swap and downheap are already implemented and need not be changed.
-
-// swap(int[] a, int i, int j)
-// downheap(int[] heap, int root, int range)
-// heapify(int[] array)
-// inPlaceHeapSort(int[] array)
-// You can check the comments in the source code to see what each function implements.
-
-// A visualisation of how heap sort works is given below.
-
-// IMPORTANT: If your solution is not in-place, your grade for this exercise will be overridden to 1.
-
-// IMPORTANT: Your solution may be manually checked to see if you have actually implemented the exercise and have not cheated the spec test system in any way. Depending on that, points may be deducted.
-
-// IMPORTANT: Make sure your implementation compiles. If it does not compile, you automatically receive a 0.
