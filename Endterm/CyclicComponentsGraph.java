@@ -3,7 +3,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-class Solution {
+// WORK HARD
+class CyclicComponentsGraph {
   /**
    * The recursive helper function that performs the depth-first search.
    * @param g the graph
@@ -12,12 +13,35 @@ class Solution {
    * @param known the vertexes that we have already visited
    */
   public static boolean componentHasCycle(Graph g, Vertex prev, Vertex u, Set<Vertex> known) {
-    return false;
+    boolean result = false;
+    known.add(u);
+
+    for(Vertex x : g.getNeighbours(u)){
+      if(x != prev){
+        if(known.contains(x)){
+          result = true;
+        }else{
+          result = componentHasCycle(g, u, x, known);
+        }
+      }
+    }
+
+    return result;
   }
 
   public static int numCyclicComponents(Graph g) {
     Set<Vertex> known = new TreeSet<>();
-    return -1;
+    int num = 0;
+
+    for(Vertex v : g.getAllVertices()){
+      if(!known.contains(v)){
+        if(componentHasCycle(g, null, v, known)){
+          num++;
+        }
+      }
+    }
+
+    return num;
   }
 }
 

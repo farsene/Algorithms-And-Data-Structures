@@ -1,0 +1,18 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - CyclicComponentsGraph",
+            "request": "launch",
+            "mainClass": "CyclicComponentsGraph",
+            "projectName": "Algorithms-And-Data-Structures_d84b5116"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Solution",
+            "request": "launch",
+            "mainClass": "Solution",
+            "projectName": "Algorithms-And-Data-Structures_d84b5116"
+        }
+    ]
+}
