@@ -56,6 +56,26 @@ class MultiSet extends AbstractMultiSet {
       return new MultiSet();
     }
 
-    
+    List<Integer> result  = new ArrayList<Integer>();
+
+    int i = 0, j = 0;
+
+    while(i < this.elements.size() && j < other.elements.size()){
+      int e1 = this.elements.get(i);
+      int e2 = other.elements.get(j);
+
+      if(e1 < e2){
+        i++;
+      }else if(e1 > e2){
+        j++;
+      }
+      else{
+        result.add(e1);
+        i++;
+        j++;
+      }
+    }
+
+    return new MultiSet(result);
   }
 }
