@@ -5,7 +5,11 @@ class LeavesCounter {
    * @return the amount of leaves of the tree.
    */
   public static int countLeaves(BinaryTree tree) {
-    // TODO
+    if(tree.getLeft() == null && tree.getRight() == null){
+      return 1;
+    }
+
+    return countLeaves(tree.getLeft()) + countLeaves(tree.getRight());
   }
   class BinaryTree {
   private int key;
