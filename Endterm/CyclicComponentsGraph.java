@@ -3,8 +3,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-// WORK HARD
-class CyclicComponentsGraph {
+class Solution {
   /**
    * The recursive helper function that performs the depth-first search.
    * @param g the graph
@@ -21,7 +20,9 @@ class CyclicComponentsGraph {
         if(known.contains(x)){
           result = true;
         }else{
-          result = componentHasCycle(g, u, x, known);
+          if(componentHasCycle(g, u, x, known)){
+            result = true;
+          }
         }
       }
     }
@@ -43,9 +44,7 @@ class CyclicComponentsGraph {
 
     return num;
   }
-}
-
-/**
+  /**
  * DO NOT MODIFY
  */
 interface Vertex extends Comparable<Vertex> {
@@ -80,4 +79,5 @@ interface Graph {
    * @return an unsorted collection of all vertices in the graph.
    */
   public Collection<Vertex> getAllVertices();
+}
 }
