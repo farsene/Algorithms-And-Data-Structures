@@ -27,7 +27,17 @@ class MultiSet extends AbstractMultiSet {
    */
   @Override
   public void insert(int element) {
-    // TODO
+    int index = 0;
+    
+    while(index < this.elements.size() && this.elements.get(index) < element){
+      index++;
+    }
+    
+    if(index < this.elements.size()){
+      this.elements.add(index, element);
+    }else{
+      this.elements.add(element);
+    }
   }
 
   /**
@@ -42,6 +52,10 @@ class MultiSet extends AbstractMultiSet {
    */
   @Override
   public AbstractMultiSet intersection(AbstractMultiSet other) {
-    // TODO
+    if(other == null || other.elements.size() == 0 || this.elements.size() == 0){
+      return new MultiSet();
+    }
+
+    
   }
 }

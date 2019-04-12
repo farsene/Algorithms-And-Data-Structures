@@ -26,37 +26,12 @@ class MultiSet extends AbstractMultiSet {
    */
   @Override
   public int count(int element) {
-    if(this.elements == null || this.elements.size() == 0){
-      return 0;
-    }
-    int k = 0, min = this.elements.get(0), max = this.elements.get(this.elements.size()-1);
-
-    int mid = 0;
-    while(min <= max){
-      mid = (mid + max)/2;
-      int cmp = element - this.elements.get(mid);
-      if(cmp < 0){
-        max = mid - 1;
-      }else if(cmp > 0){
-        min = mid + 1;
-      }else{
+    int k = 0;
+    for(Integer i : this.elements){
+      if(i == element){
         k++;
-        break;
       }
     }
-
-    int i = mid+1;
-    while(i < this.elements.size() && this.elements.get(i) == element){
-      k++;
-      i++;
-    }
-
-    i = mid-1;
-    while(i >=0 && this.elements.get(i) == element){
-      k++;
-      i--;
-    }
-
     return k;
   }
 
@@ -71,62 +46,42 @@ class MultiSet extends AbstractMultiSet {
    */
   @Override
   public AbstractMultiSet union(AbstractMultiSet other) {
-    // TODO
-  }
-
-  /**
-   * LIBRARY CLASS.
-   */
-  public abstract class AbstractMultiSet {
-    /**
-     * The list of elements that this MultiSet contains.
-     * This list is sorted in the constructor.
-     */
-    protected final List<Integer> elements;
-  
-    /**
-     * Creates a new MultiSet that will contain the elements from `elements`.
-     * The list of elements will be sorted.
-     *
-     * @param elements
-     *     The list of elements that this MultiSet will contain.
-     */
-    public AbstractMultiSet(List<Integer> elements) {
-      this.elements = elements;
-      Collections.sort(this.elements);
+    if(other == null || other.elements.size() == 0){
+      return this;
     }
-  
-    /**
-     * Creates a new, empty MultiSet.
-     */
-    public AbstractMultiSet() {
-      this(new ArrayList<>());
+    if(this.elements.size() == 0){
+      return other;
     }
-  
-    /**
-     * @return A copy of the elements of this multiset.
-     */
-    public List<Integer> getElements() {
-      return new ArrayList<>(elements);
+    
+    List<Integer> result = new ArrayList<Integer>();
+    
+    int i = 0, j = 0;
+    
+    while(i < this.elements.size() && j < other.elements.size()){
+      int e1 = this.elements.get(i), e2 = other.elements.get(j);
+      if(e1 < e2){
+        result.add(e1);
+        i++;
+      }else if(e1 > e2){
+        result.add(e2);
+        j++;
+      }else{
+        result.add(e1);
+        i++;
+        j++;
+      }
     }
-  
-    /**
-     * @param element
-     *     the integer element to search for.
-     * @return the number of occurrences of `element` in `this` multiset.
-     */
-    public abstract int count(int element);
-  
-    /**
-     * Calculates the union between `this` and `other`.
-     * In the union of `this` and `other`, the frequency of each distinct element in the result set is defined as follows:
-     * Given `C = A.union(B)`. Then for every integer `i`, `C.count(i) == max(A.count(i), B.count(i))`.
-     *
-     * @param other
-     *     the other multiset to take the union with.
-     * @return The union of multisets `this` and `other`.
-     */
-    public abstract AbstractMultiSet union(AbstractMultiSet other);
+    
+    while(i < this.elements.size()){
+      result.add(this.elements.get(i));
+      i++;
+    }
+    
+    while(j< other.elements.size()){
+      result.add(other.elements.get(j));
+      j++;
+    }
+    
+    return new MultiSet(result);
   }
 }
-
