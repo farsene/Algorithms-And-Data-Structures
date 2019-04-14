@@ -18,18 +18,17 @@ class Solution {
     Map<Vertex, Vertex> predecessors = new TreeMap<>();
 
     List<Vertex> result = new ArrayList<Vertex>();
-
-    Vertex from = v;
     boolean hit = false;
 
-    while(git.hasNext()){
-      Vertex x = git.next();
-      if(g.getNeighbours(from).contains(x)){
-        predecessors.put(x, from);
+    if(v == u){
+      return new ArrayList<Vertex>(Arrays.asList(v));
+    }
+
+    for(Vertex n : g.getNeighbours(v)){
+      if(n == u){
+        return new ArrayList<Vertex>(Arrays.asList(v,u));
       }
-      else{
-        from = x;
-      }
+      map.put(n, v);
     }
   }
 
@@ -37,7 +36,7 @@ class Solution {
   interface Vertex {
     int getId();
   }
-  
+
   interface Graph {
     // Gets neighbours of v in this Graph, ordered by id
     public List<Vertex> getNeighbours(Vertex v);
