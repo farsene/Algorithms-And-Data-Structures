@@ -20,6 +20,8 @@ class Solution {
     List<Vertex> result = new ArrayList<Vertex>();
     boolean hit = false;
 
+    predecessors.put(v, v);
+
     if(v == u){
       return new ArrayList<Vertex>(Arrays.asList(v));
     }
@@ -28,9 +30,37 @@ class Solution {
       if(n == u){
         return new ArrayList<Vertex>(Arrays.asList(v,u));
       }
-      map.put(n, v);
+      predecessors.put(n, v);
     }
+
+    while(git.hasNext()){
+      Vertex temp = git.next();
+
+      if(temp == u){
+        hit = true;
+      }
+
+      for(Vertex n : g.getNeighbours(temp)){
+        predecessors.put(n, temp);
+      }
+    }
+
+    if(hit == true){
+      result.add(0,u);
+      Vertex temp = u;
+      while(!predecessors.containsKey(temp)){
+        temp = predecessors.get(temp);
+        if(temp == v){
+          result.add(0,temp);
+          break;
+        }
+        result.add(0,temp);
+      }
+    }
+
+    return result;
   }
+}
 
   // FULL IMPLEMENTATION ON WEBLAB
   interface Vertex {
