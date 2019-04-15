@@ -11,8 +11,34 @@ class Solution {
    */
   public static boolean checkPalindrome(SLList list) {
     LibraryStack<Character> stack = new LibraryStack<>();
-    // TODO
 
+    if(list == null || list.size() == 0 || list.size() == 1){
+      return true;
+    }
+
+    boolean result = true;
+    boolean isOdd = list.size()%2 == 1;
+    int sz = list.size()/2;
+
+    for(int i = 1 ; i <= sz ; i ++){
+      Character c = list.removeFirst();
+      stack.push(c);
+    }
+
+    if(isOdd){
+      list.removeFirst();
+    }
+
+    for(int i = 1 ; i <= sz ; i ++){
+      char c1 = stack.pop();
+      char c2 = list.removeFirst();
+
+      if(c1 != c2){
+        result = false;
+      }
+    }
+
+    return result;
   }
 }
 import java.util.*;
