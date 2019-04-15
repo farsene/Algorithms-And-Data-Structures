@@ -41,14 +41,16 @@ class Solution {
       }
 
       for(Vertex n : g.getNeighbours(temp)){
-        predecessors.put(n, temp);
+        if(!predecessors.containsKey(n)){
+          predecessors.put(n, temp);
+        }
       }
     }
 
     if(hit == true){
       result.add(0,u);
       Vertex temp = u;
-      while(!predecessors.containsKey(temp)){
+      while(predecessors.containsKey(temp)){
         temp = predecessors.get(temp);
         if(temp == v){
           result.add(0,temp);
