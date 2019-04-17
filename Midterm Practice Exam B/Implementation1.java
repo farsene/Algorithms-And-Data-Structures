@@ -11,8 +11,33 @@ class Solution {
    */
   public static boolean checkPalindrome(SLList list) {
     LibraryQueue<Entry> queue = new LibraryQueue<>();
-    // TODO
 
+    if(list == null || list.size() == 0 || list.size() == 1){
+      return true;
+    }
+
+    boolean result = true;
+
+    int size = list.size();
+    int mid = size/2;
+
+    for(int i = 1 ; i <= mid ; i++){
+      queue.enqueue(new Entry(i, list.removeFirst()));
+    }
+
+    if(size % 2 == 1){
+      list.removeFirst();
+    }
+
+    for(int i = 1 ; i <= mid ; i ++){
+      char c1 = queue.dequeue().getElement();
+      char c2 = list.removeFirst();
+      if(c1 != c2){
+        result = false;
+      }
+    }
+
+    return result;
   }
 }
 //class Solution {

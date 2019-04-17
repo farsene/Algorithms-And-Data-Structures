@@ -12,8 +12,25 @@ class Solution {
    */
   public static List<Integer> pqSort(List<Integer> list) {
     LibraryPQ queue = new SolutionPQ();
-    // TODO
+    List<Integer> result = new ArrayList<Integer>();
 
+    if(list == null){
+      return null;
+    }
+
+    if(list.size() == 0 || list.size() == 1){
+      return list;
+    }
+
+    for(Integer i : list){
+      queue.insert(i);
+    }
+
+    for(int i = 0 ; i < list.size() ; i++){
+      result.add(queue.removeMax());
+    }
+
+    return result;
   }
 }
 
@@ -27,7 +44,15 @@ class SolutionPQ extends LibraryPQ {
    */
   @Override
   public void upHeap(int i) {
-    // TODO
+    if(i > 0){
+      while(this.getInHeap(i) > this.getInHeap((i-1)/2)){
+        swap(i, (i-1)/2);
+        i = (i-1)/2;
+        if(i < 0){
+          break;
+        }
+      }
+    }
   }
 }
 //import java.util.*;
