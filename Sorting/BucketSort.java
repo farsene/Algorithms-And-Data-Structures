@@ -1,7 +1,7 @@
 
 import java.util.*;
 
-class Solution {
+class Solution { 
  @SuppressWarnings("unchecked")
  public static Queue<Integer>[] fillBuckets(int[] array) {
    int vmin = Integer.MAX_VALUE;

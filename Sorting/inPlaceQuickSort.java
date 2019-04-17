@@ -7,7 +7,7 @@ class Solution {
  public static void quickSort(int[] elements) {
    quickSort(elements, 0, elements.length-1);
  }
-
+ 
  public static void quickSort(int[] elements, int a, int b){
 
    if(a >= b){

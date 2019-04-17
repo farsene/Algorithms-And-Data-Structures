@@ -30,7 +30,7 @@ class Solution {
    }
 
    for(int i = 0 ; i < list.size() ; i++){
-     buckets[list.get(i).toCharArray()[index] - 48].add(list.get(i));
+     buckets[list.get(i).toCharArray()[index] - '0'].add(list.get(i));
    }
 
    int curIndex = 0;

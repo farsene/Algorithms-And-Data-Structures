@@ -22,7 +22,7 @@
     quickSort(elements, low, indexPivot - 1);
 
     quickSort(elements,indexPivot, high);
-   }
+   } 
 
    }
 

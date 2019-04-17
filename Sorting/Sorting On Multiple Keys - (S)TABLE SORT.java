@@ -9,7 +9,7 @@ class Solution {
        String[] temp = table[i];
 
        int c = table[i][column].compareTo(table[j-1][column]);
-                  //System.out.println("j " + table[j][column] + " j-1 " + table[j-1][column] + " c " + c);
+                   //System.out.println("j " + table[j][column] + " j-1 " + table[j-1][column] + " c " + c);
 
        while(j > 0 && c < 0){
           table[j] = table[j-1];
